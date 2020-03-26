@@ -1,0 +1,143 @@
+﻿<Window x:Class="FinalExam.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinalExam.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext ="{Binding Path=MainVM, Source={StaticResource ViewModelLocator}}"
+        Title="MainWindow" WindowStartupLocation ="CenterScreen" Width ="600" Height="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="181*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="2">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Authors" Foreground="Blue" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical" Width="300" Grid.Column="0" VerticalAlignment="Top">
+                        <Label Content="Authors List"  HorizontalAlignment="Center"></Label>
+                        <ListBox VerticalAlignment="Top" Margin="0,0,0,0" ItemsSource="{Binding AuthorList}" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}" Width="250" Height="250" Background="Wheat">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate >
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Last Name: "></Label>
+                                            <Label Content="{Binding LastName}" ></Label>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="First Name: "></Label>
+                                            <Label Content="{Binding FirstName}" ></Label>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Author Number "></Label>
+                                            <Label Content="{Binding AuthorNumber}" ></Label>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                        <Label Content="Author List Controls"  HorizontalAlignment="Center"></Label>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding OpenAuthorViewCommand}">Add Author</Button>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding OpenAuthorViewCommand}">Edit Author</Button>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding DeleteAuthorCommand}">Remove Author</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Customers" Foreground="Blue" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="104"/>
+                        <ColumnDefinition Width="196"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical" Width="300" Grid.Column="0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        <Label Content="Customers List"  HorizontalAlignment="Center"></Label>
+                        <ListBox VerticalAlignment="Top" Margin="0,0,0,0" ItemsSource="{Binding CustomerList}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" Width="250" Height="250" Background="Wheat">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate >
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Customer Number: "></Label>
+                                            <Label Content="{Binding CustomerNumber}" ></Label>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Last Name: "></Label>
+                                            <Label Content="{Binding LastName}" ></Label>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="First Name: "></Label>
+                                            <Label Content="{Binding FirstName}" ></Label>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Wallet: "></Label>
+                                            <Label Content="{Binding Wallet}" ></Label>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Top">
+                        <Label Content="Author List Controls"  HorizontalAlignment="Center"></Label>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding OpenCustomerView}">Add Customer</Button>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding DeleteCustomer}">Delete Customer</Button>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding OpenBuyCommand}">Buy A book</Button>
+                        <Label/>
+                        <Button Width="150" Height="40" Command="{Binding OpenAddFunds}">Add Funds</Button>
+                        <Label />
+                        <Label Content="Bought Books List"  HorizontalAlignment="Center"/>
+                        <ListBox VerticalAlignment="Top" Margin="0,0,0,0" ItemsSource="{Binding SelectedCustomer.BooksBoughtList}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" Width="250" Height="100" Background="Wheat">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate >
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Title: "></Label>
+                                            <Label Content="{Binding Title}" ></Label>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Publisher: "></Label>
+                                            <Label Content="{Binding Publisher}" ></Label>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</Window>
